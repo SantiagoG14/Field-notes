@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { AuthContextProvider } from "./contexts/AuthContext"
+import { Route, Routes } from "react-router-dom"
+import Signup from "./components/auth/Signup"
+import { Theme } from "./contexts/Theme"
+import { Toaster } from "react-hot-toast"
+import Login from "./components/auth/Login"
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ minHeight: "100vh", height: "100vh" }}>
+      <AuthContextProvider>
+        <Theme>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              style: {
+                fontFamily: "Inter, sans-serif",
+              },
+            }}
+          />
+          <Routes>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Theme>
+      </AuthContextProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
